@@ -1,4 +1,5 @@
 import { CreateUsuarioDto } from './dto/create-user-dto';
+import { LoginUsuarioDto } from './dto/login-dto';
 import { UsuarioService } from './usuario.service';
 import {
   Body,
@@ -19,8 +20,13 @@ export class UsuarioController {
   }
 
   @UsePipes(new ValidationPipe({ whitelist: true }))
-  @Post()
+  @Post('nuevo')
   create(@Body() dto: CreateUsuarioDto) {
     return this.usuarioService.create(dto);
+  }
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  @Post('login')
+  login(@Body() dto: LoginUsuarioDto) {
+    return this.usuarioService.login(dto);
   }
 }

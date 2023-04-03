@@ -7,17 +7,24 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { MensajeDto } from './dto/mensaje.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from 'src/guards/jwt.guard';
+import { GetPrincipal } from 'src/decorators/get-principal.decorator';
+import { log } from 'console';
 
 @Controller('mensaje')
 export class MensajeController {
   constructor(private readonly mensajeService: MensajeService) {}
-
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async getAll() {
+  async getAll(@GetPrincipal() user: any) {
+    console.log('user', user);
+
     return await this.mensajeService.getAll();
   }
 
