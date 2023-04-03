@@ -6,13 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MensajeModule } from './mensaje/mensaje.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { MensajeEntity } from './mensaje/mensaje.entity';
+import { UsuarioEntity } from './usuario/usuario.entity';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-      isGlobal: true,
-    }),
+    MensajeModule,
+    UsuarioModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -22,13 +21,12 @@ import { MensajeEntity } from './mensaje/mensaje.entity';
         username: 'root',
         password: '',
         database: 'wires_db',
-        entities: [MensajeEntity],
+        entities: [MensajeEntity, UsuarioEntity],
         synchronize: true,
         logging: false,
       }),
       inject: [ConfigService],
     }),
-    MensajeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

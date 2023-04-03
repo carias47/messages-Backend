@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, Min } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 import { IsNotBlank } from 'src/decorators/is-not-blank.decorator';
 
 export class MensajeDto {
