@@ -12,5 +12,5 @@ export class MensajeEntity {
   descripcion: string;
 
   @Column({ type: 'timestamp', nullable: false })
-  fecheCreate?: Date;
+  fechaCreate?: Date;
 }
