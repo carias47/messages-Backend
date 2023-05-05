@@ -7,6 +7,13 @@ import { MensajeModule } from './mensaje/mensaje.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { MensajeEntity } from './mensaje/mensaje.entity';
 import { UsuarioEntity } from './usuario/usuario.entity';
+import {
+  DB_DATABASE,
+  DB_HOST,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_USER,
+} from './config/constants';
 
 @Module({
   imports: [
@@ -16,12 +23,12 @@ import { UsuarioEntity } from './usuario/usuario.entity';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'mariadb',
-        host: 'localhost',
-        port: 3306,
-        username: 'root',
-        password: '',
-        database: 'wires_db',
-        entities: [MensajeEntity, UsuarioEntity],
+        host: configService.get<string>(DB_HOST),
+        port: +configService.get<number>(DB_PORT),
+        username: configService.get<string>(DB_USER),
+        password: configService.get<string>(DB_PASSWORD),
+        database: configService.get<string>(DB_DATABASE),
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
         logging: false,
       }),
