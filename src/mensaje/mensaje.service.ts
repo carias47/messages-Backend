@@ -25,7 +25,9 @@ export class MensajeService {
   }
 
   async findById(id: number): Promise<MensajeEntity> {
-    const publicacion = await this.mensajeRepository.findOne(id);
+    const publicacion = await this.mensajeRepository.findOne({
+      where: { id: id },
+    });
     if (!publicacion) {
       throw new NotFoundException(new MessageDto('no existe'));
     }
@@ -33,7 +35,9 @@ export class MensajeService {
   }
 
   async findByNombre(titulo: string): Promise<MensajeEntity> {
-    const mnsj = await this.mensajeRepository.findOne({ titulo: titulo });
+    const mnsj = await this.mensajeRepository.findOne({
+      where: { titulo: titulo },
+    });
     return mnsj;
   }
 
