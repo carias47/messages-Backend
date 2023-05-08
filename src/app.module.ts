@@ -5,8 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MensajeModule } from './mensaje/mensaje.module';
 import { UsuarioModule } from './usuario/usuario.module';
-import { MensajeEntity } from './mensaje/mensaje.entity';
-import { UsuarioEntity } from './usuario/usuario.entity';
+
 import {
   DB_DATABASE,
   DB_HOST,
