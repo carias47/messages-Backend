@@ -17,6 +17,10 @@ import {
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
     MensajeModule,
     UsuarioModule,
     TypeOrmModule.forRootAsync({
@@ -30,7 +34,6 @@ import {
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
-        logging: false,
       }),
       inject: [ConfigService],
     }),
